@@ -1,0 +1,7 @@
+5.1: Initialize the directory, configure apache, and start github
+5.2: Paste initial functions into includes/functions.php
+5.3: Create MySQL database with user gallery
+5.4: Define database constants in includes/config.php
+
+6.1: Create database class in includes/database.php
+6.2: Test database connection

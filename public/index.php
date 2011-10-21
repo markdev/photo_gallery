@@ -1,5 +1,5 @@
 <?php
 
-echo "Is this working?";
+include('../includes/database.php');
 
 ?>
