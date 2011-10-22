@@ -5,10 +5,8 @@ class MySQLDatabase {
 	
 	private $connection;
 	public $last_entry;
-	public $magic_quotes_active;
-	public $real_escape_string_exists;
-	//private $magic_quotes_active;
-	//private $real_escape_string_exists;
+	private $magic_quotes_active;
+	private $real_escape_string_exists;
 
 	function __construct() {
 		$this->open_connection();
