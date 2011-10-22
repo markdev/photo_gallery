@@ -5,3 +5,5 @@
 
 6.1: Create database class in includes/database.php
 6.2: Test database connection
+6.3: Started user object
+6.4: Added user instantiation methods
