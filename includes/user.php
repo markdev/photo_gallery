@@ -1,8 +1,8 @@
 <?php
+require_once(LIB_PATH.DS."config.php");
 
 //If it's going to need the database, then it's
 //a good idea to require it before we start.
-require_once('database.php');
 
 class User {
 

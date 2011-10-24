@@ -8,3 +8,4 @@
 6.3: Started user object
 6.4: Added user instantiation methods
 6.5: Added session class, tested user login
+6.6: Added initialize.php and defined path constants

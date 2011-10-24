@@ -1,10 +1,11 @@
 <?php
+require_once(LIB_PATH.DS."config.php");
+
 //A class to help work with Sessions
 //In our case, primarily to manage logging users in and out
 
 //Keep in mind when workin iwth session that it is generally
 //inadvisable to store db-related objects in sessions
-
 
 class Session {
 
