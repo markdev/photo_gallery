@@ -7,3 +7,4 @@
 6.2: Test database connection
 6.3: Started user object
 6.4: Added user instantiation methods
+6.5: Added session class, tested user login
