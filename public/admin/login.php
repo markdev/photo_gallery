@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		  </table>
 		</form>
     </div>
-    <div id="footer">Copyright <?php echo date("Y", time()); ?>, Kevin Skoglund</div>
+    <div id="footer">Copyright <?php echo date("Y", time()); ?>, Mark Karavan</div>
   </body>
 </html>
 <?php if(isset($database)) { $database->close_connection(); } ?>
