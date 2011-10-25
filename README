@@ -9,3 +9,5 @@
 6.4: Added user instantiation methods
 6.5: Added session class, tested user login
 6.6: Added initialize.php and defined path constants
+
+7.1: Created a folder for chapter 7 exercises, and a logfile challenge in public/admin
