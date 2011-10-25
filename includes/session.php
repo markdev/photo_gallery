@@ -31,8 +31,43 @@ class Session {
 		if($user) {
 			$this->user_id = $_SESSION['user_id'] = $user->id;
 			$this->logged_in = true;
+			$this->add_log_entry($this->user_id);
 		}
 	}
+
+	public function add_log_entry($user_id) {
+		$file = SITE_ROOT.DS.'logs/log.txt';
+		if($handle = fopen($file, 'a')) {
+		   $user = User::find_by_id($user_id);
+		   $time = strftime("%G-%m-%d %T", time());	
+           fwrite($handle, "\n$time | $user->username logged in ");
+		} else {
+			
+		}
+		fclose($handle);
+	}
+
+	public function read_log_entries() {
+		$file = SITE_ROOT.DS.'logs/log.txt';
+		$content = "<ul>";
+		if($handle = fopen($file, 'r')) {
+			while(!feof($handle)) {
+				$blurb = fgets($handle);
+				if(strlen($blurb) > 1) {	
+					$content .= "<li>" . $blurb  . "</li>";
+				}
+			}
+		}
+		fclose($handle);
+		$content .= "</ul>";
+		return $content;
+	}
+
+	public function clear_logs() {
+		$file = SITE_ROOT.DS.'logs/log.txt';
+		if($handle = fopen($file, 'w')) {
+		}	
+	}	
 
 	public function logout() {
 		unset($_SESSION['user_id']);
