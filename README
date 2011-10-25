@@ -12,3 +12,5 @@
 
 7.1: Created a folder for chapter 7 exercises, and a logfile challenge in public/admin
 7.2: Revised the logfile challenge
+
+9:1: Added CRUD methods to user class
