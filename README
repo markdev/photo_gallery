@@ -15,3 +15,4 @@
 
 9.1: Added CRUD methods to user class
 9.2: Abstracted the CRUD methods within user class
+9.3: CRUD methods abstracted successfully.
