@@ -7,6 +7,8 @@ require_once(LIB_PATH.DS."config.php");
 class User {
 
 	protected static $table_name = "users";
+	protected static $db_fields = array('username', 'password', 'first_name', 'last_name');
+
 	public $id;
 	public $username;
 	public $password;
@@ -72,6 +74,25 @@ class User {
 		//will return true or false
 		return array_key_exists($attribute, $object_vars);
 	}
+	
+	protected function attributes() {
+		$attributes = array();
+		foreach(self::$db_fields as $field) {
+			if(property_exists($this, $field)) {
+				$attributes[$field] = $this->$field;
+			}
+		}
+		return $attributes;
+	}
+
+	protected function sanitized_attributes() {
+		global $database;
+		$clean_attributes = array();
+		foreach($this->attributes() as $key => $value) {
+			$clean_attributes[$key] = $database->escape_value($value);
+		}
+		return $clean_attributes;
+	}
 
 	public function save() {
 		return isset($this->id) ? $this->update() : $this->create();
@@ -79,13 +100,12 @@ class User {
 
 	public function create() {
 		global $database;
+		$attributes = $this->sanitized_attributes();
 		$sql = "INSERT INTO " . self::$table_name  . " (";
-		$sql .= "username, password, first_name, last_name";
+		$sql .= join(", ", array_keys($attributes));
 		$sql .= ") VALUES ('";
-		$sql .= $database->escape_value($this->username) . "', '";
-		$sql .= $database->escape_value($this->password) . "', '";
-		$sql .= $database->escape_value($this->first_name) . "', '";
-		$sql .= $database->escape_value($this->last_name) . "')";
+		$sql .= join("', '", array_values($attributes));
+		$sql .= "')";
 		if($database->query($sql)) {
 			$this->id = $database->insert_id();
 			return true;
@@ -96,12 +116,14 @@ class User {
 
 	public function update() {
 		global $database;
+		$attributes = $this->sanitized_attributes();
+		$attribute_pairs = array();
+		foreach($attributes as $key => $value) {
+			$attribute_pairs[] = "{$key}='{$value}'";
+		}
 		$sql = "UPDATE " . self::$table_name  . " SET ";
-		$sql .= "username='". $database->escape_value($this->username) ."', ";
-		$sql .= "password='". $database->escape_value($this->password) ."', ";
-		$sql .= "first_name='". $database->escape_value($this->first_name) ."', ";
-		$sql .= "last_name='". $database->escape_value($this->last_name) ."' ";
-		$sql .= "WHERE id=". $database->escape_value($this->id);
+		$sql .= join(", ", $attribute_pairs);
+		$sql .= " WHERE id=". $database->escape_value($this->id);
 		$database->query($sql);
 		return ($database->affected_rows() == 1) ? true : false;
 	}
