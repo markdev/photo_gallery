@@ -6,8 +6,11 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 <?php include_layout_template('admin_header.php'); ?>
 
 <?php
-	$user = User::find_by_id(3);
-	$user->username = "donkeyfuck";
+	$user = new User();
+	$user->username = "zookeeper";
+	$user->password = "goats";
+	$user->first_name = "thingy";
+	$user->last_name = "thangy";
 	$user->save();
 ?>
 
