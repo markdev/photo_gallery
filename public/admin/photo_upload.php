@@ -3,24 +3,24 @@ require_once('../../includes/initialize.php');
 if (!$session->is_logged_in()) { redirect_to("login.php"); }
 ?>
 
-<?php include_layout_template('admin_header.php'); ?>
-
 <?php
 	$max_file_size = 1048576;	// expressed in bytes; one megabyte is 1,048,576 bytes
-	$message = "";
 	if(isset($_POST['submit'])) {
 		$photo = new Photograph();
 		$photo->caption = $_POST['caption'];
 		$photo->attach_file($_FILES['file_upload']);
 		if($photo->save()) {
 			//Success
-			$message = "Photograph uploaded successfully.  <a href=\"photo_upload_view.php?id={$photo->id}\">View</a>";
+			$session->message("Photograph uploaded successfully.");
+			redirect_to('photo_upload_view.php');
 		} else {
 			//Failure
 			$message = join("<br/>", $photo->errors);
 		}
 	}
 ?>
+
+<?php include_layout_template('admin_header.php'); ?>
 
 <a href="index.php">Back</a>
 
