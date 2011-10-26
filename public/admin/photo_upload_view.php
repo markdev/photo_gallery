@@ -8,6 +8,7 @@
 
 <h2>Photographs</h2>
 
+<?php echo output_message($message); ?>
 <table class="bordered">
   <tr>
     <th>Image</th>
@@ -15,6 +16,7 @@
     <th>Caption</th>
     <th>Size</th>
     <th>Type</th>
+	<th>&nbsp</th>
   </tr>
 <?php foreach($photos as $photo): ?>
   <tr>
@@ -23,6 +25,7 @@
     <td><?php echo $photo->caption; ?></td>
     <td><?php echo $photo->size_as_text(); ?></td>
     <td><?php echo $photo->type; ?></td>
+	<td><a href="delete_photo.php?id=<?=$photo->id?>">Delete</a></td>
   </tr>
 <?php endforeach; ?>
 </table>
